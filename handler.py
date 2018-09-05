@@ -22,7 +22,7 @@ sys.path.append(os.path.join(current_location, 'vendored'))
 '''
 The following imports must be placed after picking up of pre-compiled dependencies
 '''
-#from gan_model import GANModel
+from PIL import Image
 from detection_model import DetectionModel
 import utils
 import settings
@@ -32,7 +32,6 @@ Declare global objects living across requests
 '''
 model_dir = utils.create_model_dir()
 utils.download_model_from_bucket(model_dir)
-#gan_model = GANModel(model_dir)
 protobuf_file_name = utils.get_env_var_or_raise_exception(
     settings.MODEL_PROTOBUF_FILE_NAME_ENV_VAR)
 model_path = model_dir + '/' + protobuf_file_name
@@ -43,13 +42,15 @@ detection_model = DetectionModel(model_path)
 
 def get_param_from_url(event, param_name):
     '''
-    Retrieve query parameters from a Lambda call. Parameters are passed through the
-    event object as a dictionary. We interested in 'queryStringParameters', since
-    the bucket name and the key are passed in the query string
+    Retrieve query parameters from a Lambda call. Parameters are
+    passed through the event object as a dictionary. We're interested
+    in 'queryStringParameters', since the bucket name and the key are
+    passed in the query string
 
     :param event: the event as input in the Lambda function
     :param param_name: the name of the parameter in the query string
     :return: parameter value or None if the parameter is not in the event dictionary
+
     '''
     params = event['queryStringParameters']
     if param_name in params:
@@ -87,26 +88,37 @@ def predict(event, context):
     '''
 
     try:
+
         # extract S3 bucket name and key from the event - they defines the
         # image for prediction
         bucket_name = get_param_from_url(event, 'bucket')
         key = get_param_from_url(event, 'key')
-
+        
+        
         print('Predict function called! Bucket/key is {}/{}'.format(bucket_name, key))
 
         if bucket_name and key:
             # download the image from S3 bucket and call prediction on it
-            image_np = utils.download_image_from_bucket(bucket_name, key)
-            # results = gan_model.predict(image)
-            # results_json = [{'digit': str(res[0]),
-            #                  'probability': str(res[1])} for res in results]
 
-            boxes, scores, classes, num = detection_model.predict(image_np)
-            print("boxes")
-            print(boxes)
+            '''
+            Uploading image from node to s3 is slightly more than 1 second FASTER on average \
+            than request.post a the binary (base64 or not)
+
+            Lambda function downloading 372 kb image from s3 is ~0.05 seconds. 
+
+            So the time saved by not having the Lambda function download the image from S3 \
+            Does not make up for the time lost by request.post
+
+            Nodes upload images instead of numpy arrays because arrays are much larger than their image
+            '''
+            
+            image_np = utils.download_image_from_bucket(bucket_name, key)
+            output_dict = detection_model.predict(image_np)
+            
+
             print("results retrieved")
-            #print 'Results retrieved: {}'.format(results_json)
-            print('Results retrieved: {}'.format(str(num)))
+            print(output_dict)
+
         else:
             message = 'Input parameters are invalid: bucket name and key must be specified'
             return lambda_gateway_response(400, {'message': message})
@@ -119,4 +131,4 @@ def predict(event, context):
 
     #return lambda_gateway_response(200, {'prediction_result': results_json})
     print("about to return prediction result to gateway")
-    return lambda_gateway_response(200, {'prediction_result': boxes})
+    return lambda_gateway_response(200, {'prediction_result': output_dict})

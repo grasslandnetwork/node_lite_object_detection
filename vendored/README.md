@@ -1,5 +1,2 @@
 ## Provisioning of Python dependencies
-In the _vendored_ folder, you have to provide additional Python dependencies, 
-required by your project. These dependencies must be deployed along with 
-the code in AWS Lambda. For this project, they weigh many megabytes, so I 
-did not check them in GitHub. 
+In the "vendored" folder, you have to provide the additional Python dependencies required. These are Tensorflow 1.7.0 and Pillow and all of their dependencies except for the Tensorboard and Pip packages. This should total 257 MB unzipped. If you install Tensorflow 1.8 or higher, your "vendored" directory will breach the Lambda deployment limit of ~262 MB. These dependencies must be deployed along with the code in AWS Lambda. Because the Tensorflow and Pillow dependencies is large, I did not commit them to the repo. 
