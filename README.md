@@ -36,7 +36,7 @@ Change the options in the settings files (serverless.yml, env_var.sh, settings.p
 Once it's complete, it should show you your new Lambda function's URL. Set this URL as an environment variable on your system.
 
 ```
-export LAMBDA_DETECTION_URL='your-lambda-url-here'
+export LAMBDA_DETECTION_URL=<your-lambda-url-here>
 ```
 
 To complete the setup of your node, return to the instructions in the [Grassland Node's README](https://github.com/grasslandnetwork/node_lite)
