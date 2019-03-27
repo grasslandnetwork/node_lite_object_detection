@@ -28,16 +28,30 @@ export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
 
 To load your new environment variables and make them available to your shell, you'll either need to close and reopen your shell or type ```source ~/.bashrc```
 
+5. Go to the AWS website and create two AWS S3 Buckets. One for the frames on which we will perform object detection, And one for the model.
 
-5. Next, clone this repo on your local machine and `cd` to the root directory
+6. Download the current eon's model from the [main website](https://www.grassland.network/) at the bottom under "Downloads" and upload it to the S3 bucket you made to hold the model
 
-Change the options in the settings files (serverless.yml, env_var.sh, settings.py) to point to your AWS S3 buckets, unzip the pre-compiled Tensorflow dependencies into the "vendor" directory (See 'Provisioning of Python Dependencies' below) and deploy from your command line using `serverless deploy`.
+7. Clone this repo on your local machine and `cd` to the root directory
 
-Once it's complete, it should show you your new Lambda function's URL. Set this URL as an environment variable on your system.
+   Change the options in the files serverless.yml and env_var.sh to point to your AWS S3 buckets...
 
-```
-export LAMBDA_DETECTION_URL=<your-lambda-url-here>
-```
+    Anywhere you see ```[REPLACE_ME: ...]``` replace it (including the brackets) with either the name of or the indicated S3 Bucket information you created in part 5 above.
+
+   Then unzip the pre-compiled Tensorflow dependencies into the "vendor" directory (See 'Provisioning of Python Dependencies' below) and deploy from your command line using `serverless deploy`.
+
+   For service removal:
+   ```	   
+   serverless remove
+   ```			  
+   DO NOT DELETE LAMBDA FUNCTIONS MANUALLY, OTHERWISE SERVERLESS WILL FAIL TO DEPLOY NEXT TIME!
+
+
+   Once it's complete, it should show you your new Lambda function's URL. Set this URL as an environment variable on your system.
+
+   ```
+   export LAMBDA_DETECTION_URL=<your-lambda-url-here>
+   ```
 
 To complete the setup of your node, return to the instructions in the [Grassland Node's README](https://github.com/grasslandnetwork/node_lite)
 
@@ -46,6 +60,8 @@ To complete the setup of your node, return to the instructions in the [Grassland
 
 #### Provisioning of Python dependencies
 In the "vendored" folder, you have to provide the additional Python 3.6 dependencies required. These are Tensorflow 1.7.0, Pillow, Joblib and all of their dependencies except for the Tensorboard and Pip packages which were removed to get under the Lambda size limit. This should total ~257 MB unzipped. If you install Tensorflow 1.8 or higher, your "vendored" directory will breach the Lambda deployment limit of ~262 MB. These dependencies must be deployed along with the code into AWS Lambda. Because the Tensorflow and Pillow dependencies are large, I did not commit them to the repo. You can download the zipped vendored directory [here](https://downloads.grassland.network/packages/node_lite_object_detection/vendored.zip).
+
+
 
 
 ## License

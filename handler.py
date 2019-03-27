@@ -75,7 +75,7 @@ def predict(event, context):
     '''
     The function is called by AWS Lambda:
 
-    {LambdaURL}/{stage}/predict?bucket=grassland-images&key=image_3.jpg
+    {LambdaURL}/{stage}/predict?bucket=[GRASSLAND_MODEL_BUCKET]&key=image_3.jpg
 
     {LambdaURL} is Lambda URL as returned by serveless installation and {stage} is set in the
     serverless.yml file.

@@ -9,18 +9,18 @@ provider:
   region: ca-central-1
   timeout: 30
   environment:
-    TF_AWS_S3_MODEL_PATH: tensorflow/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
-    TF_AWS_MODEL_PROTOBUF_FILE_NAME: frozen_inference_graph.pb
-    TF_AWS_S3_MODEL_BUCKET_NAME: grassland-models-00
+    TF_AWS_S3_MODEL_PATH: [REPLACE_ME: path/to/model/file/inside/bucket/]eon_0.pb
+    TF_AWS_MODEL_PROTOBUF_FILE_NAME: eon_0.pb
+    TF_AWS_S3_MODEL_BUCKET_NAME: [REPLACE_ME: GRASSLAND_MODEL_BUCKET]
   iamRoleStatements:
     - Effect: "Allow"
       Action:
         - "s3:GetObject"
       Resource:
-        - "arn:aws:s3:::grassland-models-00"
-        - "arn:aws:s3:::grassland-models-00/*"
-        - "arn:aws:s3:::grassland-images"
-        - "arn:aws:s3:::grassland-images/*"
+        - "arn:aws:s3:::[REPLACE_ME: GRASSLAND_MODEL_BUCKET]"
+        - "arn:aws:s3:::[REPLACE_ME: GRASSLAND_MODEL_BUCKET]/*"
+        - "arn:aws:s3:::[REPLACE_ME: GRASSLAND_FRAME_S3_BUCKET]"
+        - "arn:aws:s3:::[REPLACE_ME: GRASSLAND_FRAME_S3_BUCKET]/*"
 
 functions:
   predict:
