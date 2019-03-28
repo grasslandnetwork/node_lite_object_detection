@@ -63,7 +63,7 @@ In the "vendored" folder, you have to provide the additional Python 3.6 dependen
 
 
 ## Additional Features That Need To Be Completed
-[Link to current list](https://gist.github.com/00hello/0199d393e872ed7645979f5daf7bd62c) of features and modules that need to be completed next
+[Link to current list](https://gist.github.com/00hello/0199d393e872ed7645979f5daf7bd62c) of Grassland features and modules that need to be completed next
 
 
 ## License
