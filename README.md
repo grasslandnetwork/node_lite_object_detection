@@ -62,8 +62,9 @@ To complete the setup of your node, return to the instructions in the [Grassland
 In the "vendored" folder, you have to provide the additional Python 3.6 dependencies required. These are Tensorflow 1.7.0, Pillow, Joblib and all of their dependencies except for the Tensorboard and Pip packages which were removed to get under the Lambda size limit. This should total ~257 MB unzipped. If you install Tensorflow 1.8 or higher, your "vendored" directory will breach the Lambda deployment limit of ~262 MB. These dependencies must be deployed along with the code into AWS Lambda. Because the Tensorflow and Pillow dependencies are large, I did not commit them to the repo. You can download the zipped vendored directory [here](https://downloads.grassland.network/packages/node_lite_object_detection/vendored.zip).
 
 
-## Additional Features That Need To Be Completed
-[Link to current list](https://gist.github.com/00hello/0199d393e872ed7645979f5daf7bd62c) of Grassland features and modules that need to be completed next
+
+## Future Grassland Software Improvements
+[Link to current list](https://gist.github.com/00hello/0199d393e872ed7645979f5daf7bd62c) of Grassland features and modules that will be built next
 
 
 ## License
