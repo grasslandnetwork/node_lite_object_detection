@@ -2,7 +2,11 @@
 
 ### A live Tensorflow model deployed as an AWS Lambda function for miners running nodes without the processing power to run a full deep learning object detection model locally. 
 
-This is the "server" in the mining client/server architecture for which the [node_lite](https://github.com/grasslandnetwork/node_lite) software is the "client". 
+This is the "server" in the mining client/server architecture for which the [node_lite](https://github.com/grasslandnetwork/node_lite) software is the "client".
+
+
+If you have questions related to this software, search in the 'Issues' tab of this Github repo to see if it's been answered. If not, feel free to open a new issue and I'll get back to you as soon as I can.
+
 
 ### Uses [Serverless](https://serverless.com/) framework for turn-key deployment.
 
