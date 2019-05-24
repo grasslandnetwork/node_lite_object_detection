@@ -1,3 +1,14 @@
+# Copyright (C) 2018-2019 David Thompson
+#
+# This file is part of Grassland
+#
+# It is subject to the license terms in the LICENSE file found in the top-level
+# directory of this distribution.
+#
+# No part of Grassland, including this file, may be copied, modified,
+# propagated, or distributed except according to the terms contained in the
+# LICENSE file.
+
 import os
 import numpy as np
 import operator
@@ -7,7 +18,7 @@ import time
 
 class DetectionModel:
     def __init__(self, path_to_ckpt):
-        # Code adapted from https://gist.github.com/madhawav/1546a4b99c8313f06c0b2d7d7b4a09e2
+        # Parts of this "__init__" "method adapted from https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb 
         self.path_to_ckpt = path_to_ckpt
 
         self.detection_graph = tf.Graph()

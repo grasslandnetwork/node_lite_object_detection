@@ -1,3 +1,5 @@
+# This "run_model.py" file is a modified version of https://github.com/Vetal1977/tf_aws_lambda/blob/1232355c591e1319a01902090f05572f2fdf9284/run_model.py which is distributed under the MIT license
+
 '''
 For test purpose only. Allows loading of a model and an image locally or from S3 bucket,
 and making prediction of loaded image

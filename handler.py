@@ -1,5 +1,5 @@
 '''
-Modified version of https://towardsdatascience.com/serving-tensorflow-models-serverless-6a39614094ff -> "I created a project that demonstrates using of AWS Lambda for serving TensorFlow models. Feel free to copy, modify and use it for commercial and non-commercial purposes"
+This "handler.py" file is a modified version of https://github.com/Vetal1977/tf_aws_lambda/blob/1232355c591e1319a01902090f05572f2fdf9284/handler.py which is distributed under the MIT license
 
 Contains handler for AWS lambda function. First, the precompiled dependencies (such as TensorFlow)
 are added. Detection model instance is created at the beginning according to AWS lambda best practices
