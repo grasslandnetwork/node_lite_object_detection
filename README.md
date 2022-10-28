@@ -34,7 +34,7 @@ To load your new environment variables and make them available to your shell, yo
 
 5. Go to the AWS website and create two AWS S3 Buckets. One for the frames on which we will perform object detection, And one for the model.
 
-6. Download the current eon's model from the [main website](https://www.grassland.network/) at the bottom under "Downloads" and upload it to the S3 bucket you made to hold the model
+6. Download the current eon's model from [here](http://downloads.grassland.network/models/eon_0.pb) and upload it to the S3 bucket you made to hold the model
 
 7. Clone this repo on your local machine and `cd` to the root directory
 
